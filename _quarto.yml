@@ -5,8 +5,8 @@ project:
 website:
   title: "España y sus vecinos"   
   favicon: my_favicon.png           #- pon tu favicon
-  # site-url: https://....               #- hay que rellenarlos
-  # repo-url: https://....
+  site-url: https://AlexMS77.github.io/trabajo_BigData_equipo/              #- hay que rellenarlos
+  repo-url: https://github.io/AlexMS77/trabajo_BigData_equipo
   # repo-actions: [edit, issue]
   search:   
     location: navbar
