@@ -1,0 +1,129 @@
+---
+title: "La evolución del gasto en educación en España y su relación con las pruebas PISA" 
+date: 2022-12-16 #- ISO8601 YYYY-MM-DD format 
+author: Naira Carruccio, Alex Monzó y Luis Pérez
+date-format: short
+format: 
+  revealjs:
+    scrollable: true
+    slide-level: 2
+    height: 900
+    width: 1600
+    toc: false
+    center-title-slide: true
+    title-slide-attributes: #- atributos para la slide de titulo
+      data-background-color: "#9f2800"   #- color de R-ladies
+    preview-links: auto  #- true: abre un iframe en lugar de abrir ventana
+    link-external-newwindow: true
+    transition: fade
+    fontcolor: "#262d36"
+    highlight-style: a11y
+    code-line-numbers: true
+    number-sections: false
+    slide-number: c/t  
+    incremental: false   
+footer: |
+  Slides hechas con [Quarto](https://quarto.org/) 
+#theme: moon
+---
+
+# Índice
+
+1. Introducción
+
+2. Análisis de gasto en educación
+
+3. Pruebas PISA
+
+4. Modelo de regresión
+
+5. Conclusiones
+
+
+---
+
+## Motivaciones 
+
+- Importancia de la variable a estudiar "Gasto en educación
+
+- Contenido adecuado a lo estudiado durante la carrera
+
+- Descubrir si existe relación entre el gasto en educación y los resultados de las pruebas PISA 
+
+---
+
+## Datos del trabajo
+
+```{r, eval = TRUE, echo = FALSE, out.width="15%", fig.pos= "right"}
+
+knitr::include_graphics(here::here("imagenes", "OECD.png"))
+
+```
+
+```{r, eval = TRUE, echo = FALSE, out.width="15%", fig.pos= "left"}
+
+knitr::include_graphics(here::here("imagenes", "unesco.png"))
+
+```
+
+```{r, eval = TRUE, echo = FALSE, out.width="15%", fig.pos= "center"}
+
+knitr::include_graphics(here::here("imagenes", "eurostat.png"))
+
+```
+
+---
+
+## Algunos gráficos
+
+
+Bueno pues vamos a hacer algún gráfico, pero claro antes he de cargar los paquetes
+
+```{r}
+#| eval: true
+library(tidyverse)
+```
+
+
+Arreglo los datos
+
+```{r}
+#- cojos datos de pingüinos y arreglo un poco 
+df <- palmerpenguins::penguins %>% 
+  dplyr::select(species, bill_depth_mm, body_mass_g) %>% 
+  tidyr::drop_na()
+```
+
+---
+
+### Primer gráfico
+
+
+```{r}
+#- primer gráfico
+p <- ggplot(data = df, 
+       mapping = aes(x = bill_depth_mm, y = body_mass_g, color = species)) +
+     geom_point()
+p
+```
+
+---
+
+### Segundo
+
+```{r}
+#- segundo gráfico
+p <- p + geom_smooth(method = "lm", se = FALSE) 
+
+p
+```
+
+---
+
+### El último
+
+```{r}
+#- tercer gráfico
+p + geom_smooth(method = "lm", se = FALSE, color = "black") 
+```
+
